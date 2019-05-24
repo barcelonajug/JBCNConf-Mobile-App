@@ -25,21 +25,16 @@
  */
 package com.devoxx.util;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
-
 import com.devoxx.model.Conference;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.SettingsService;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.*;
+
 public class DevoxxSettings {
-    public static final String BUILD_NUMBER = "47";
+    public static final String BUILD_NUMBER = "48";
 
     /**
      * boolean option to switch on/off automatic authentication by using a self generated random UUID
