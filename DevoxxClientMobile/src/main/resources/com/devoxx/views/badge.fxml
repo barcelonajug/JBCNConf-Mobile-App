@@ -18,6 +18,12 @@
 	xmlns="http://javafx.com/javafx/8.0.111"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.devoxx.views.BadgePresenter">
+	<top>
+		<VBox alignment="TOP_CENTER" styleClass="bottom">
+			<Button fx:id="saveButton" onAction="#saveBadge" styleClass="submit" text="SAVE" />
+			<ProgressIndicator fx:id="progress" visible="false"></ProgressIndicator>
+		</VBox>
+	</top>	
 	<center>
 		<GridPane fx:id="grid" BorderPane.alignment="CENTER">
 			<columnConstraints>
@@ -90,10 +96,4 @@
 				GridPane.vgrow="ALWAYS" />
 		</GridPane>
 	</center>
-	<bottom>
-		<VBox alignment="TOP_CENTER" styleClass="bottom">
-			<Button fx:id="saveButton" onAction="#saveBadge" styleClass="submit" text="SAVE" />
-			<ProgressIndicator fx:id="progress" visible="false"></ProgressIndicator>
-		</VBox>
-	</bottom>
 </View>
