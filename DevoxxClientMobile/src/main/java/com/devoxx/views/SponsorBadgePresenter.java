@@ -38,6 +38,7 @@ import com.devoxx.util.DevoxxSettings;
 import com.devoxx.views.cell.BadgeCell;
 import com.devoxx.views.helper.Placeholder;
 import com.devoxx.views.helper.Util;
+import com.devoxx.views.helper.SessionVisuals.SessionListType;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.BarcodeScanService;
 import com.gluonhq.charm.down.plugins.SettingsService;
@@ -72,6 +73,8 @@ public class SponsorBadgePresenter extends GluonPresenter<DevoxxApplication> {
     
     @Inject
     private Service service;
+    
+    private final Button refreshButton = MaterialDesignIcon.REFRESH.button();    
 
     private Sponsor sponsor;
     private FloatingActionButton scan;
@@ -96,6 +99,15 @@ public class SponsorBadgePresenter extends GluonPresenter<DevoxxApplication> {
                 }
             });
         });
+        
+        refreshButton.setOnAction(e -> {
+            new Toast(DevoxxBundle.getString("OTN.BADGES.REFRESH")).show();
+            loadSponsorBadges(sponsor);
+//            filteredSessions = new FilteredList<>(service.reloadSessionsFromCFP(SessionListType.FAVORITES));
+//            filteredSessions.predicateProperty().bind(filterPredicateProperty);
+//            scheduleListView.setItems(filteredSessions);
+        });
+        
     }
 
     public void setSponsor(Sponsor sponsor) {
@@ -144,7 +156,7 @@ public class SponsorBadgePresenter extends GluonPresenter<DevoxxApplication> {
             service.logoutSponsor();
             DevoxxView.BADGES.switchView();
         });
-        appBar.getActionItems().setAll(shareButton, logoutButton);
+        appBar.getActionItems().setAll(refreshButton, shareButton, logoutButton);
 
 //		  TODO decide where to show badges count
 //        badges.setOnSucceeded(event -> {
