@@ -1,8 +1,6 @@
-# JBCNConf
+# JBCNConf By Barcelona Java Users Group
 
-**From developers, For developers**
-
-[JBCNConf](https://www.jbcnconf.com/) is a set of international conferences.
+[JBCNConf](https://www.jbcnconf.com/) is an international conference where you can find the best and friendly developers in the world.
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
