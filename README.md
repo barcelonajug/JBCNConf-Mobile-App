@@ -1,12 +1,10 @@
-# Devoxx
+# JBCNConf By Barcelona Java Users Group
 
-**From developers, For developers**
-
-[Devoxx](https://beta.devoxx.com/) and [Voxxed Days](https://beta.voxxeddays.com) are a set of international conferences.
+[JBCNConf](https://www.jbcnconf.com/) is an international conference where you can find the best and friendly developers in the world.
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-This repository contains the code for the official Devoxx app, based on [Gluon Mobile](http://gluonhq.com/products/mobile/),
+This repository a Devoxx fork contains the code for the official JBCNConf mobile app, based on [Gluon Mobile](http://gluonhq.com/products/mobile/),
 for Android and iOS devices.
 
 ## Features
@@ -26,9 +24,9 @@ The app includes the following set of features:
 
 Source code is released as a sample of a professional Gluon Mobile application and therefore makes use of best practices.
 
-Although these features are tailor made for Devoxx, other conferences
+Although these features are tailor made for JBCNConf, other conferences
 can re-use most of the features. We encourage them to fork and use the source code.
-Please refer to our [Wiki](https://github.com/devoxx/MyDevoxxGluon/wiki)
+Please refer to our [Wiki](https://github.com/barcelonajug/JBCNConf-Mobile-App/wiki)
 for complete description of the project and how to start development.
 
 ## Getting Started
@@ -42,14 +40,14 @@ Run the mobile project on desktop:
 ./gradlew :DevoxxClient:run
 ```
 
-For more details about the project, please refer to our [Wiki](https://github.com/devoxx/MyDevoxxGluon/wiki).
+For more details about the project, please refer to our [Wiki](https://github.com/barcelonajug/JBCNConf-Mobile-App/wiki).
 
 
 ## Contributing
 
 We appreciate your help!
 
-We use [github issue tracker](https://github.com/devoxx/MyDevoxxGluon/issues)
+We use [github issue tracker](https://github.com/barcelonajug/JBCNConf-Mobile-App/issues)
 for all bug reports and proposals.
 
 ## Support
