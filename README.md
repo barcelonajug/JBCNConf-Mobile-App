@@ -1,12 +1,12 @@
-# Devoxx
+# JBCNConf
 
 **From developers, For developers**
 
-[Devoxx](https://beta.devoxx.com/) and [Voxxed Days](https://beta.voxxeddays.com) are a set of international conferences.
+[JBCNConf](https://www.jbcnconf.com/) is a set of international conferences.
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-This repository contains the code for the official Devoxx app, based on [Gluon Mobile](http://gluonhq.com/products/mobile/),
+This repository a Devoxx fork contains the code for the official JBCNConf mobile app, based on [Gluon Mobile](http://gluonhq.com/products/mobile/),
 for Android and iOS devices.
 
 ## Features
