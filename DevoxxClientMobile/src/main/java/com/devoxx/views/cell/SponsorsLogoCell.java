@@ -39,7 +39,6 @@ import javafx.scene.layout.BorderPane;
 public class SponsorsLogoCell extends CharmListCell<Sponsor> {
 
     private final BorderPane root;
-    private final BorderPane content;
     private final ImageView background;
 
     private static final int PHONE_HEIGHT = 222;
@@ -50,7 +49,7 @@ public class SponsorsLogoCell extends CharmListCell<Sponsor> {
     public SponsorsLogoCell() {
         background = new ImageView();
         background.setPreserveRatio(true);
-        content = new BorderPane(background);
+        BorderPane content = new BorderPane(background);
         root = new BorderPane(content);
         getStyleClass().add("sponsors-logo-cell");
 
