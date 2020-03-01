@@ -37,18 +37,20 @@ public class Sponsor extends Searchable implements Mergeable<Sponsor> {
 	private String href;
 	private Image image;
 	private Level level;
+	private String code;
 
 	public Sponsor() {
 
 	}
 
-	public Sponsor(String id, String name, String slug, String href, Image image, Level level) {
+	public Sponsor(String id, String name, String slug, String href, Image image, Level level, String code) {
 		this.id = id;
 		this.name = name;
 		this.slug = slug;
 		this.href = href;
 		this.image = image;
 		this.level = level;
+		this.code = code;
 	}
 
 	public String getId() {
@@ -97,6 +99,14 @@ public class Sponsor extends Searchable implements Mergeable<Sponsor> {
 
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String toCSV() {
