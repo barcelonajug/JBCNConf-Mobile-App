@@ -69,8 +69,7 @@ public class SponsorsLogoCell extends CharmListCell<Sponsor> {
 
         if (sponsor != null && !empty) {
             if (sponsor.getImage() != null) {
-                Image image = ImageCache.get(sponsor.getImage().getSrc(), () -> DEFAULT_BACKGROUND_IMAGE,
-                        downloadedImage -> background.setImage(downloadedImage));                
+                Image image = ImageCache.get(sponsor.getImage().getSrc(), () -> DEFAULT_BACKGROUND_IMAGE, background::setImage);
                 background.setImage(image);
                 background.setCache(true);
                 background.setUserData(sponsor);
