@@ -701,23 +701,25 @@ public class DevoxxService implements Service {
 
 		final GluonObservableList<Sponsor> sponsors = retrieveSponsors();
 		sponsors.setOnSucceeded(e -> {
-			sponsors.stream()
-					.filter(s -> s.getCode().equals(sponsorCode))
-					.findFirst()
-					.map(s -> {
-						sponsor.set(s);
-						sponsor.setState(ConnectState.SUCCEEDED);
-						return s;
-					})
-					.orElseGet(() -> {
-						sponsor.setState(ConnectState.FAILED);
-						return null;
-					});
+			final Optional<Sponsor> optionalSponsor =
+					findSponsorFromSponsorsByCode(sponsorCode, sponsors);
+
+			if (optionalSponsor.isPresent()) {
+				sponsor.set(optionalSponsor.get());
+				sponsor.setState(ConnectState.SUCCEEDED);
+			} else {
+				sponsor.setState(ConnectState.FAILED);
+			}
 		});
 		sponsor.setOnFailed(e ->
 				LOG.log(Level.WARNING, String.format(REMOTE_FUNCTION_FAILED_MSG, "sponsor"),
 				e.getSource().getException()));
 		return sponsor;
+	}
+
+	private Optional<Sponsor> findSponsorFromSponsorsByCode(String sponsorCode, GluonObservableList<Sponsor> sponsors) {
+		return sponsors.stream().filter(s -> s.getCode().equals(sponsorCode))
+				.findFirst();
 	}
 
 	@Override
