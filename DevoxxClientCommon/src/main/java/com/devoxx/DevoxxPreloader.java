@@ -38,8 +38,32 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Method;
+import java.util.logging.Logger;
+
 public class DevoxxPreloader extends Preloader {
 
+    private static final Logger LOG = Logger.getLogger(DevoxxPreloader.class.getName());
+
+    // Fix for #254
+    static {
+        if (Platform.isAndroid()) {
+            try {
+                Method forName = Class.class.getDeclaredMethod("forName", String.class);
+                Method getDeclaredMethod = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
+
+                Class<?> vmRuntimeClass = (Class<?>) forName.invoke(null, "dalvik.system.VMRuntime");
+                Method getRuntime = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "getRuntime", null);
+                Method setHiddenApiExemptions = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
+                Object sVmRuntime = getRuntime.invoke(null);
+                if (sVmRuntime != null && setHiddenApiExemptions != null) {
+                    setHiddenApiExemptions.invoke(sVmRuntime, new Object[]{new String[]{"L"}});
+                }
+            } catch (Throwable e) {
+                LOG.severe("Error: " + e.getMessage());
+            }
+        }
+    }
     private Stage stage;
     
     private static final boolean IS_DESKTOP = Platform.isDesktop();
