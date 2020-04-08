@@ -39,10 +39,15 @@ import com.gluonhq.charm.glisten.control.CharmListView;
 import com.gluonhq.charm.glisten.control.ProgressIndicator;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.connect.GluonObservableList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import javax.inject.Inject;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class SponsorsLogoPresenter extends GluonPresenter<DevoxxApplication> {
 
@@ -89,9 +94,10 @@ public class SponsorsLogoPresenter extends GluonPresenter<DevoxxApplication> {
         GluonObservableList<Sponsor> sponsorsList = service.retrieveSponsors();
         sponsorsList.setOnSucceeded(e -> {
             appBar.setProgressBarVisible(false);
-            sponsorListView.setItems(sponsorsList);
             if (sponsorsList.isEmpty()) {
                 sponsorListView.setPlaceholder(Placeholder.empty("sponsors", service.getConference().getName()));
+            } else {
+                sponsorListView.setItems(filterSponsorsWithoutImage(sponsorsList));
             }
         });
         sponsorsList.setOnFailed(e -> {
@@ -100,5 +106,11 @@ public class SponsorsLogoPresenter extends GluonPresenter<DevoxxApplication> {
             retry.setOnAction(ae -> retrieveSponsorList());
             sponsorListView.setPlaceholder(Placeholder.failure("Sponsors", retry));
         });
+    }
+
+    private ObservableList<Sponsor> filterSponsorsWithoutImage(GluonObservableList<Sponsor> sponsorsList) {
+        return sponsorsList.stream()
+                .filter(s -> s.getImage() != null)
+                .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
     }
 }
