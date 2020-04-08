@@ -319,7 +319,7 @@ public class DesktopWearableService implements WearableService {
         try {
             InputStream is;
             if (speaker.getPicture() == null || speaker.getPicture().isEmpty()) {
-                is = Util.class.getResourceAsStream("speaker.jpeg");
+                is = Util.class.getResourceAsStream("speaker.png");
             } else {
                 is = new URL(speaker.getPicture()).openStream();
             } 
