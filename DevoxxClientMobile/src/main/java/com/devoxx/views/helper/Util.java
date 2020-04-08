@@ -71,7 +71,7 @@ import static com.devoxx.util.DevoxxSettings.DAYS_PAST_END_DATE;
 public class Util {
 
     // speaker avatars
-    private static final Image DEFAULT_IMAGE = new Image(SpeakerCard.class.getResource("speaker.jpeg").toString());
+    private static final Image DEFAULT_IMAGE = new Image(SpeakerCard.class.getResource("speaker.png").toString());
     
     // drawer's header default image
     private static final Image DEFAULT_BACKGROUND_IMAGE = new Image(Util.class.getResource("backgroundImage.png").toString());
