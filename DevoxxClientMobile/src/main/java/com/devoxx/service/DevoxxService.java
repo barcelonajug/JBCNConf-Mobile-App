@@ -25,60 +25,8 @@
  */
 package com.devoxx.service;
 
-import static com.devoxx.util.DevoxxSettings.LOCAL_NOTIFICATION_RATING;
-import static com.devoxx.util.DevoxxSettings.SESSION_FILTER;
-import static com.devoxx.views.helper.Util.addCSVToLocalStorage;
-import static com.devoxx.views.helper.Util.fetchCSVFromLocalStorage;
-import static com.devoxx.views.helper.Util.isOnGoing;
-import static com.devoxx.views.helper.Util.safeStr;
-import static java.time.temporal.ChronoUnit.SECONDS;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.json.JSONObject;
-
 import com.airhacks.afterburner.injection.Injector;
-import com.devoxx.model.Badge;
-import com.devoxx.model.Conference;
-import com.devoxx.model.Exhibitor;
-import com.devoxx.model.Favored;
-import com.devoxx.model.Favorite;
-import com.devoxx.model.Favorites;
-import com.devoxx.model.Feedback;
-import com.devoxx.model.Floor;
-import com.devoxx.model.Location;
-import com.devoxx.model.Note;
-import com.devoxx.model.Rating;
-import com.devoxx.model.RatingData;
-import com.devoxx.model.RemoteConfiguration;
-import com.devoxx.model.Session;
-import com.devoxx.model.SessionId;
-import com.devoxx.model.SessionType;
-import com.devoxx.model.Speaker;
-import com.devoxx.model.Sponsor;
-import com.devoxx.model.SponsorBadge;
-import com.devoxx.model.Tag;
-import com.devoxx.model.TeamMember;
-import com.devoxx.model.Track;
-import com.devoxx.model.Vote;
+import com.devoxx.model.*;
 import com.devoxx.util.DevoxxBundle;
 import com.devoxx.util.DevoxxNotifications;
 import com.devoxx.util.DevoxxSettings;
@@ -95,13 +43,7 @@ import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.Dialog;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.cloudlink.client.data.DataClient;
-import com.gluonhq.cloudlink.client.data.DataClientBuilder;
-import com.gluonhq.cloudlink.client.data.OperationMode;
-import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
-import com.gluonhq.cloudlink.client.data.RemoteFunctionList;
-import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
-import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.cloudlink.client.data.*;
 import com.gluonhq.cloudlink.client.push.PushClient;
 import com.gluonhq.cloudlink.client.user.LoginMethod;
 import com.gluonhq.cloudlink.client.user.User;
@@ -112,20 +54,29 @@ import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.converter.JsonInputConverter;
 import com.gluonhq.connect.converter.JsonIterableInputConverter;
 import com.gluonhq.connect.provider.DataProvider;
-
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.ReadOnlyListWrapper;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
+import org.json.JSONObject;
+
+import java.io.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static com.devoxx.util.DevoxxSettings.LOCAL_NOTIFICATION_RATING;
+import static com.devoxx.util.DevoxxSettings.SESSION_FILTER;
+import static com.devoxx.views.helper.Util.*;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class DevoxxService implements Service {
 
@@ -200,7 +151,7 @@ public class DevoxxService implements Service {
 	private ListChangeListener<Session> internalFavoredSessionsListener = null;
 	private ObservableList<Session> internalFavoredSessions = FXCollections.observableArrayList();
 	private ObservableList<Favorite> favorites = FXCollections.observableArrayList();
-	
+
 	private ReadOnlyObjectWrapper<RemoteConfiguration> remoteConfiguration = new ReadOnlyObjectWrapper<>(new RemoteConfiguration());
 
 	public DevoxxService() {
@@ -538,7 +489,7 @@ public class DevoxxService implements Service {
 
 		sessions.set(sessionsList);
 	}
-	
+
 	private void retrieveRemoteConfigurationInternal() {
 		RemoteFunctionObject fnRemoteConfiguration = RemoteFunctionBuilder.create("config").object();
 		GluonObservableObject<RemoteConfiguration> remoteConfigCall = fnRemoteConfiguration.call(RemoteConfiguration.class);
@@ -644,7 +595,7 @@ public class DevoxxService implements Service {
 	public ReadOnlyListProperty<Track> retrieveTracks() {
 		return tracks.getReadOnlyProperty();
 	}
-	
+
 	@Override
 	public ReadOnlyListProperty<Tag> retrieveTags() {
 		return tags.getReadOnlyProperty();
@@ -661,7 +612,7 @@ public class DevoxxService implements Service {
 			tags.setAll(getConference().getTags());
 		}
 	}
-	
+
 	@Override
 	public ReadOnlyListProperty<SessionType> retrieveSessionTypes() {
 		return sessionTypes.getReadOnlyProperty();
@@ -746,12 +697,29 @@ public class DevoxxService implements Service {
 
 	@Override
 	public GluonObservableObject<Sponsor> retrieveSponsorByCode(String sponsorCode) {
-		RemoteFunctionObject fnSponsorByCode = RemoteFunctionBuilder.create("sponsor")
-				.param("conferenceId", getConference().getId()).param("sponsorCode", sponsorCode).object();
-		GluonObservableObject<Sponsor> sponsor = fnSponsorByCode.call(Sponsor.class);
-		sponsor.setOnFailed(e -> LOG.log(Level.WARNING, String.format(REMOTE_FUNCTION_FAILED_MSG, "sponsor"),
+		final GluonObservableObject<Sponsor> sponsor = new GluonObservableObject<>();
+
+		final GluonObservableList<Sponsor> sponsors = retrieveSponsors();
+		sponsors.setOnSucceeded(e -> {
+			final Optional<Sponsor> optionalSponsor =
+					findSponsorFromSponsorsByCode(sponsorCode, sponsors);
+
+			if (optionalSponsor.isPresent()) {
+				sponsor.set(optionalSponsor.get());
+				sponsor.setState(ConnectState.SUCCEEDED);
+			} else {
+				sponsor.setState(ConnectState.FAILED);
+			}
+		});
+		sponsor.setOnFailed(e ->
+				LOG.log(Level.WARNING, String.format(REMOTE_FUNCTION_FAILED_MSG, "sponsor"),
 				e.getSource().getException()));
 		return sponsor;
+	}
+
+	private Optional<Sponsor> findSponsorFromSponsorsByCode(String sponsorCode, GluonObservableList<Sponsor> sponsors) {
+		return sponsors.stream().filter(s -> s.getCode().equals(sponsorCode))
+				.findFirst();
 	}
 
 	@Override
@@ -972,7 +940,7 @@ public class DevoxxService implements Service {
 					break;
 				}
 			}
-			ratingData.setState(ConnectState.SUCCEEDED);			
+			ratingData.setState(ConnectState.SUCCEEDED);
 		});
 		voteTexts.setOnFailed(e -> LOG.log(Level.WARNING, String.format(REMOTE_FUNCTION_FAILED_MSG, "voteTexts"),
 				e.getSource().getException()));
@@ -982,7 +950,7 @@ public class DevoxxService implements Service {
 	@Override
 	public GluonObservableObject<Vote> retrieveExistingVote(String talkId) {
 		RemoteFunctionObject fnGetVoteTalk = RemoteFunctionBuilder.create("getVoteTalk").param("talkId", talkId)
-				.param("email", getAuthenticatedUser().getEmail()).object();		
+				.param("email", getAuthenticatedUser().getEmail()).object();
 		GluonObservableObject<Vote> voteTalk = fnGetVoteTalk.call(Vote.class);
 		voteTalk.setOnFailed(e -> LOG.log(Level.WARNING, String.format(REMOTE_FUNCTION_FAILED_MSG, "getVoteTalk"),
 				e.getSource().getException()));
@@ -1064,8 +1032,8 @@ public class DevoxxService implements Service {
 				.param("message", feedback.getMessage()).object();
 		fnSendFeedback.call(String.class);
 	}
-	
-	
+
+
 	@Override
 	public RemoteConfiguration getRemoteConfiguration() {
 		return remoteConfiguration.getReadOnlyProperty().get();
