@@ -11,7 +11,7 @@
     <artifactId>jbcnconf-remote-functions</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-
+    
     <name>JBCNConfRemoteFunctions</name>
 
     <dependencies>
