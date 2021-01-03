@@ -15,11 +15,6 @@
     <name>DevoxxClientCommon</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>charm-down-plugin-settings</artifactId>
-            <version>3.8.6</version>
-        </dependency>
     </dependencies>
 
     <repositories>
