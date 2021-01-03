@@ -57,10 +57,12 @@
                     <target>${client.target}</target>
                     <mainClass>${main.class}</mainClass>
                     <attachList>
+                        <list>device</list>
                         <list>display</list>
                         <list>lifecycle</list>
                         <list>statusbar</list>
                         <list>storage</list>
+                        <list>settings</list>
                     </attachList>
                 </configuration>
             </plugin>
