@@ -53,6 +53,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.gluonhq.attach.runtimeargs.RuntimeArgsService;
+import com.gluonhq.attach.settings.SettingsService;
+import com.gluonhq.attach.storage.StorageService;
+import com.gluonhq.attach.util.Services;
 import org.json.JSONObject;
 
 import com.airhacks.afterburner.injection.Injector;
@@ -87,10 +91,6 @@ import com.devoxx.views.helper.Placeholder;
 import com.devoxx.views.helper.SessionVisuals.SessionListType;
 import com.devoxx.views.helper.Util;
 import com.devoxx.views.layer.ConferenceLoadingLayer;
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.RuntimeArgsService;
-import com.gluonhq.charm.down.plugins.SettingsService;
-import com.gluonhq.charm.down.plugins.StorageService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.Dialog;

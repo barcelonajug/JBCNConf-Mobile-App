@@ -26,8 +26,8 @@
 package com.devoxx.util;
 
 import com.devoxx.model.Conference;
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.SettingsService;
+import com.gluonhq.attach.settings.SettingsService;
+import com.gluonhq.attach.util.Services;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;

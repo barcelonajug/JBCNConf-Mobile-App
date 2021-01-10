@@ -28,8 +28,9 @@ package com.devoxx.views.helper;
 import com.devoxx.model.Speaker;
 import com.devoxx.util.DevoxxBundle;
 import static com.devoxx.util.DevoxxSettings.TWITTER_URL;
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.BrowserService;
+
+import com.gluonhq.attach.browser.BrowserService;
+import com.gluonhq.attach.util.Services;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.Toast;
 import javafx.application.Platform;

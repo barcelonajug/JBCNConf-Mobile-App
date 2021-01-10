@@ -54,6 +54,7 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.GluonObservableObject;
 
+import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -300,7 +301,7 @@ public class VotePresenter extends GluonPresenter<DevoxxApplication> {
             });
             feedbackDialog.getButtons().addAll(cancelButton, saveButton);
             feedbackDialog.setOnCloseRequest(e -> feedbackLabel.setText(feedback.getText()));
-            if (com.gluonhq.charm.down.Platform.isAndroid()) {
+            if (com.gluonhq.attach.util.Platform.isAndroid()) {
                 feedback.skinProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {

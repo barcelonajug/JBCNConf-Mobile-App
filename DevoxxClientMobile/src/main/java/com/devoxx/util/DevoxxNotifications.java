@@ -31,9 +31,9 @@ import com.devoxx.model.Session;
 import com.devoxx.service.Service;
 import com.devoxx.views.SessionPresenter;
 import com.devoxx.views.helper.Util;
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.LocalNotificationsService;
-import com.gluonhq.charm.down.plugins.Notification;
+import com.gluonhq.attach.localnotifications.LocalNotificationsService;
+import com.gluonhq.attach.localnotifications.Notification;
+import com.gluonhq.attach.util.Services;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 
