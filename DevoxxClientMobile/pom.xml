@@ -43,7 +43,7 @@
 
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
-            <artifactId>barcode</artifactId>
+            <artifactId>barcode-scan</artifactId>
             <version>${attach.version}</version>
         </dependency>
         <dependency>
