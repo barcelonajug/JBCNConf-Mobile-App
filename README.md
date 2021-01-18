@@ -37,7 +37,7 @@ Before you clone and run the project, it is advisable to go through the short tu
 Run the mobile project on desktop:
 
 ```
-./gradlew :DevoxxClient:run
+mvn -f DevoxxClientMobile javafx::run
 ```
 
 For more details about the project, please refer to our [Wiki](https://github.com/barcelonajug/JBCNConf-Mobile-App/wiki).

@@ -25,12 +25,11 @@
  */
 package com.devoxx.util;
 
-import com.gluonhq.charm.down.Platform;
-import com.gluonhq.charm.down.Services;
-
-import com.gluonhq.charm.down.plugins.Cache;
-import com.gluonhq.charm.down.plugins.CacheService;
-import com.gluonhq.charm.down.plugins.StorageService;
+import com.gluonhq.attach.cache.Cache;
+import com.gluonhq.attach.cache.CacheService;
+import com.gluonhq.attach.storage.StorageService;
+import com.gluonhq.attach.util.Platform;
+import com.gluonhq.attach.util.Services;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.image.Image;

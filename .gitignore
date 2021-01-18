@@ -1,9 +1,5 @@
-# Gradle
-.gradle/
-build/
-
-# Netbeans
-.nb-gradle/
+#Maven
+target/
 
 # IntelliJ IDEA
 out/

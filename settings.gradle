@@ -1,8 +1,0 @@
-include 'DevoxxClientCommon'
-include 'DevoxxClientMobile'
-include 'DevoxxRemoteFunctions'
-include 'JBCNConfRemoteFunctions'
-
-rootProject.name = 'JBCNConf_Mobile_App'
-
-project(':DevoxxClientMobile').name = 'JBCNConfClient'
